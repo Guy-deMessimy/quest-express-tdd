@@ -60,7 +60,7 @@ describe('Test routes', () => {
                 const expected = { error: 'Bookmark not found' };
                 expect(response.body).toEqual(expected);
                 done();
-            })
+        })
         });
         it('GET /bookmarks/:id - OK (bookmark provided)', (done) => {
         request(app) 

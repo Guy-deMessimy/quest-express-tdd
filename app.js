@@ -16,9 +16,6 @@ app.get("/bookmarks", (req, res) => {
     res.status(200).json("Watch your bookmark");
 })
 
-app.get("/bookmarks/2", (req, res) => {
-    res.status(404).json({ error: 'Bookmark not found' });
-})
 app.post("/bookmarks", (req, res) => {
     const { url, title} = req.body;
     if(!url || !title) {
@@ -33,6 +30,10 @@ app.post("/bookmarks", (req, res) => {
         });
     });
 });
+
+app.get("/bookmarks/2", (req, res) => {
+    res.status(404).json({ error: 'Bookmark not found' });
+})
 
 app.get("/bookmarks/1", (req, res) => {
     connection.query(
