@@ -31,21 +31,17 @@ app.post("/bookmarks", (req, res) => {
     });
 });
 
-app.get("/bookmarks/2", (req, res) => {
-    res.status(404).json({ error: 'Bookmark not found' });
-})
 
-app.get("/bookmarks/1", (req, res) => {
+app.get("/bookmarks/:id", (req, res) => {
     connection.query(
       "SELECT * from bookmark WHERE id=?",
       [req.params.id],
       (err, results) => {
-          console.log(results)
-        if (err) {  
+        if (results.length === 0) {  
           console.log(err);
-          res.status(500).send("Error retrieving data");
+          res.status(404).send({ error: "Bookmark not found" });
         } else {
-          res.status(200).json({ id: 1, url: 'https://nodejs.org/', title: 'Node.js' });
+          res.status(200).json(results[0]);
         }
       }
     );
